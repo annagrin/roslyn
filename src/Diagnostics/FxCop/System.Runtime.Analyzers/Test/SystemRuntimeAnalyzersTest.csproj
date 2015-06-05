@@ -97,6 +97,7 @@
     <Compile Include="Globalization\UseOrdinalStringComparisonTests.cs" />
     <Compile Include="Performance\TestForEmptyStringsUsingStringLengthTests.cs" />
     <Compile Include="Reliability\DoNotLockOnObjectsWithWeakIdentityTests.cs" />
+    <Compile Include="Security\DoNotCatchCorruptedStateExceptionsTests.cs" />
     <Compile Include="Usage\DisposableFieldsShouldBeDisposedTests.Fixer.cs" />
     <Compile Include="Usage\DisposableFieldsShouldBeDisposedTests.cs" />
     <Compile Include="Performance\AvoidUnsealedAttributesTests.cs" />

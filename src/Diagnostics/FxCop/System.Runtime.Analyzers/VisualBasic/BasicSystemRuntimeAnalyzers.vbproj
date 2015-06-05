@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Security\DoNotCatchCorruptedStateExceptionsAnalyzer.vb" />
+    <Content Include="Shared\SyntaxNodeHelper.cs" />
     <Content Include="System.Runtime.VisualBasic.Analyzers.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

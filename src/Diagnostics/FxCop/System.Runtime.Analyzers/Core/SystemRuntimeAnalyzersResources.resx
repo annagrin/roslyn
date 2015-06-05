@@ -270,4 +270,25 @@
   <data name="UseGenericEventHandlerInstances" xml:space="preserve">
     <value>Use System.EventHandler&lt;T&gt; where T inherits System.EventArgs or use System.EventHandler</value>
   </data>
+  <data name="CategorySecurity" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="DoNotCatchCorruptedStateExceptions" xml:space="preserve">
+    <value>Do not catch corrupted state exceptions in general handlers.</value>
+  </data>
+  <data name="DoNotCatchCorruptedStateExceptionsDescription" xml:space="preserve">
+    <value>Do not author general catch handlers in code that receives corrupted state exceptions. Code that receives and intends to handle corrupted state exceptions should author distinct handlers for each exception type.</value>
+  </data>
+  <data name="DoNotCatchCorruptedStateExceptionsMessage" xml:space="preserve">
+    <value>Modify {0} to catch and handle a more specific set of exception type(s) than {1} or rethrow the exception. </value>
+  </data>
+  <data name="WrapVulnerableFinallyClausesInOuterTry" xml:space="preserve">
+    <value>Wrap vulnerable finally clauses in outer try</value>
+  </data>
+  <data name="WrapVulnerableFinallyClausesInOuterTryDescription" xml:space="preserve">
+    <value>Finally clauses that restore security-related state created by impersonation wrapper  should be wrapped in an outer try block. This will prevent an exception filter further up the stack from executing before a secure environment can be restored. Exception filters that run code expressions in the first pass after the guarded try blocks and before the associated finally block represent a possible security vulnerability. Examples of vulnerable functionality in finally clauses that should be protected against this include: calls to RevertAssert on an asserted permission, undoing a temporary impersonation, reversing an internal flag that bypasses a security check, and restoring the culture associated with a thread.</value>
+  </data>
+  <data name="WrapVulnerableFinallyClausesInOuterTryMessage" xml:space="preserve">
+    <value>Wrap the finally clause in {0} that calls {1} in an outer try block with an associated catch that simply rethrows.</value>
+  </data>
 </root>

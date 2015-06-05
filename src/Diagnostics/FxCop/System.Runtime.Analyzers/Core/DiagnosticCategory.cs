@@ -9,6 +9,7 @@ namespace System.Runtime.Analyzers
         public static readonly string Interoperability = SystemRuntimeAnalyzersResources.CategoryInteroperability;
         public static readonly string Performance = SystemRuntimeAnalyzersResources.CategoryPerformance;
         public static readonly string Reliability = SystemRuntimeAnalyzersResources.CategoryReliability;
+        public static readonly string Security = SystemRuntimeAnalyzersResources.CategorySecurity;
         public static readonly string Usage = SystemRuntimeAnalyzersResources.CategoryUsage;
         public static readonly string Naming = SystemRuntimeAnalyzersResources.CategoryNaming;
     }

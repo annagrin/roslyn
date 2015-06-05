@@ -152,6 +152,15 @@ namespace System.Runtime.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        internal static string CategorySecurity {
+            get {
+                return ResourceManager.GetString("CategorySecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage.
         /// </summary>
         internal static string CategoryUsage {
@@ -229,6 +238,33 @@ namespace System.Runtime.Analyzers {
         internal static string DisposableFieldsShouldBeDisposed {
             get {
                 return ResourceManager.GetString("DisposableFieldsShouldBeDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not catch corrupted state exceptions in general handlers..
+        /// </summary>
+        internal static string DoNotCatchCorruptedStateExceptions {
+            get {
+                return ResourceManager.GetString("DoNotCatchCorruptedStateExceptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not author general catch handlers in code that receives corrupted state exceptions. Code that receives and intends to handle corrupted state exceptions should author distinct handlers for each exception type..
+        /// </summary>
+        internal static string DoNotCatchCorruptedStateExceptionsDescription {
+            get {
+                return ResourceManager.GetString("DoNotCatchCorruptedStateExceptionsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify {0} to catch and handle a more specific set of exception type(s) than {1} or rethrow the exception. .
+        /// </summary>
+        internal static string DoNotCatchCorruptedStateExceptionsMessage {
+            get {
+                return ResourceManager.GetString("DoNotCatchCorruptedStateExceptionsMessage", resourceCulture);
             }
         }
         
@@ -517,6 +553,33 @@ namespace System.Runtime.Analyzers {
         internal static string UseGenericEventHandlerInstances {
             get {
                 return ResourceManager.GetString("UseGenericEventHandlerInstances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrap vulnerable finally clauses in outer try.
+        /// </summary>
+        internal static string WrapVulnerableFinallyClausesInOuterTry {
+            get {
+                return ResourceManager.GetString("WrapVulnerableFinallyClausesInOuterTry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finally clauses that restore security-related state created by impersonation wrapper  should be wrapped in an outer try block. This will prevent an exception filter further up the stack from executing before a secure environment can be restored. Exception filters that run code expressions in the first pass after the guarded try blocks and before the associated finally block represent a possible security vulnerability. Examples of vulnerable functionality in finally clauses that should be protected against t [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WrapVulnerableFinallyClausesInOuterTryDescription {
+            get {
+                return ResourceManager.GetString("WrapVulnerableFinallyClausesInOuterTryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrap the finally clause in {0} that calls {1} in an outer try block with an associated catch that simply rethrows..
+        /// </summary>
+        internal static string WrapVulnerableFinallyClausesInOuterTryMessage {
+            get {
+                return ResourceManager.GetString("WrapVulnerableFinallyClausesInOuterTryMessage", resourceCulture);
             }
         }
     }
