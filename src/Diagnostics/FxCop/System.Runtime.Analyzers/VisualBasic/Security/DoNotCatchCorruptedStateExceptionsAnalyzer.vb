@@ -18,16 +18,15 @@ Namespace System.Runtime.Analyzers
     Public Class BasicDoNotCatchCorruptedStateExceptionsAnalyzer
         Inherits DoNotCatchCorruptedStateExceptionsAnalyzer
 
-        Shared ReadOnly nodeKindsOfInterest As ImmutableArray(Of SyntaxKind) = New ImmutableArray(Of SyntaxKind) From
-            {
+        Shared ReadOnly nodeKindsOfInterest As ImmutableArray(Of SyntaxKind) = ImmutableArray.Create(
                 SyntaxKind.SubBlock,
                 SyntaxKind.FunctionBlock,
                 SyntaxKind.OperatorBlock,
                 SyntaxKind.AddHandlerAccessorBlock,
                 SyntaxKind.RemoveHandlerAccessorBlock,
                 SyntaxKind.GetAccessorBlock,
-                SyntaxKind.SetAccessorBlock
-            }
+                SyntaxKind.SetAccessorBlock)
+
 
         Protected Overrides Function GetAnalyzer(context As CompilationStartAnalysisContext, compilationTypes As CompilationMSInternalTypes) As Analyzer
             Dim analyzer = New BasicAnalyzer(compilationTypes)
@@ -66,7 +65,7 @@ Namespace System.Runtime.Analyzers
                 For Each node As SyntaxNode In methodNode.DescendantNodes(AddressOf MayContainCatchNodesOfInterest)
 
                     Dim kind As SyntaxKind = node.Kind()
-                    If (kind = SyntaxKind.CatchBlock) Then
+                    If (kind <> SyntaxKind.CatchBlock) Then
                         Continue For
                     End If
 
@@ -79,7 +78,6 @@ Namespace System.Runtime.Analyzers
                     If (catchDeclaration IsNot Nothing) Then
                         exceptionTypeSym = SyntaxNodeHelper.GetSymbol(catchDeclaration.Type, model)
                         If (Not IsCatchTypeTooGeneral(exceptionTypeSym)) Then
-
                             Continue For
                         End If
                     End If
