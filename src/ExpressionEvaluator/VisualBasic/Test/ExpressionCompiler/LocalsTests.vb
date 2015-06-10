@@ -192,7 +192,7 @@ End Class"
 "{
   // Code size       16 (0x10)
   .maxstack  1
-  IL_0000:  ldstr      ""2""
+  IL_0000:  ldstr      ""$2""
   IL_0005:  call       ""Function Microsoft.VisualStudio.Debugger.Clr.IntrinsicMethods.GetObjectByAlias(String) As Object""
   IL_000a:  unbox.any  ""Boolean""
   IL_000f:  ret
@@ -3141,6 +3141,55 @@ End Class
 
             testData = New CompilationTestData()
             context.CompileExpression("x", errorMessage, testData)
+            Assert.Null(errorMessage)
+            testData.GetMethodData("<>x.<>m0").VerifyIL(xIL)
+        End Sub
+
+        <WorkItem(3236, "https://github.com/dotnet/roslyn/pull/3236")>
+        <Fact>
+        Public Sub AnonymousTypeParameter()
+            Const source = "
+Imports System.Linq
+
+Class C
+    Shared Sub Main(args As String())
+        Dim anonymousTypes =
+            From a In args
+            Select New With {.Value = a, .Length = a.Length}
+        Dim values =
+            From t In anonymousTypes
+            Select t.Value
+    End Sub
+End Class
+"
+
+            Const methodName = "C._Closure$__._Lambda$__1-1"
+
+            Const xIL = "
+{
+  // Code size        2 (0x2)
+  .maxstack  1
+  IL_0000:  ldarg.1
+  IL_0001:  ret
+}
+"
+
+            Dim comp = CreateCompilationWithMscorlib({source}, {SystemCoreRef, MsvbRef}, TestOptions.DebugDll)
+            Dim runtime = CreateRuntimeInstance(comp)
+
+            Dim typeName As String = Nothing
+            Dim locals = ArrayBuilder(Of LocalAndMethod).GetInstance()
+            Dim testData As CompilationTestData = Nothing
+            GetLocals(runtime, methodName, argumentsOnly:=False, locals:=locals, count:=1, typeName:=typeName, testData:=testData)
+
+            VerifyLocal(testData, typeName, locals(0), "<>m0", "t", expectedILOpt:=xIL)
+            locals.Free()
+
+            Dim context = CreateMethodContext(runtime, methodName)
+            Dim errorMessage As String = Nothing
+
+            testData = New CompilationTestData()
+            context.CompileExpression("t", errorMessage, testData)
             Assert.Null(errorMessage)
             testData.GetMethodData("<>x.<>m0").VerifyIL(xIL)
         End Sub
